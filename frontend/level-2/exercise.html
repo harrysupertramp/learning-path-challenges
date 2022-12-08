@@ -30,13 +30,13 @@
                 <label for="password">Password</label>
                 <input type="password" class="form-control" placeholder="Password" v-model="password" />
                 <small id="passwordHelp" class="form-text text-muted"
-                  >Password should contain
-                  <span :class="has_minimum_length ? 'has_required' : ''">at least 8 characters</span>,
-                  <span :class="has_lowercase ? 'has_required' : ''">one lowercase letter</span>,
-                  <span :class="has_uppercase ? 'has_required' : ''">one uppercase letter</span>,
-                  <span :class="has_number ? 'has_required' : ''">one number</span>, and
-                  <span :class="has_special ? 'has_required' : ''">one special character.</span></small
-                >
+                  > Password should contain:
+                  <br/><span :class="has_minimum_length ? 'has_required' : ''"> - at least 8 characters</span>,
+                  <br/><span :class="has_lowercase ? 'has_required' : ''"> - one lowercase letter</span>,
+                  <br/><span :class="has_uppercase ? 'has_required' : ''"> - one uppercase letter</span>,
+                  <br/><span :class="has_number ? 'has_required' : ''"> - one number</span>, and
+                  <br/><span :class="has_special ? 'has_required' : ''"> - one special character.</span></small
+                > 
               </div>
             </password-helper>
           </div>
@@ -51,14 +51,29 @@
           password: '',
           has_minimum_length: false,
           has_number: false,
-          has_lowercsae: false,
+          has_lowercase: false,
           has_uppercase: false,
           has_special: false
         }
       },
       watch: {
         password() {
-          // TODO: define this function
+          if(this.password.length >= 8){
+            this.has_minimum_length = true
+          }
+          if(/\d/.test(this.password)){
+            this.has_number = true
+          }
+          if(/[A-Z]/.test(this.password)){
+            this.has_uppercase = true
+          }
+          if(/[a-z]/.test(this.password)){
+            this.has_lowercase = true
+          }
+          const specialChars = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/
+          if( specialChars.test(this.password)){
+            this.has_special = true
+          }
         }
       }
     })
