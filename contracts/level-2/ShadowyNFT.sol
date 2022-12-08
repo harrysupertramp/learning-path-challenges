@@ -202,14 +202,17 @@ contract ShadowyNFT is ERC721 {
     receive() external payable {}
 
     function withdraw() external {
-        // TODO: add logic for withdrawing the ETH inside the contract
+        require(msg.sender==owner);
+        payable(msg.sender).transfer(address(this).balance);
     }
 
     function mint(address to, uint id) external payable {
-        // TODO add logic for token minting (1 ETH = 1 NFT)
+        require(msg.value == 1 wei);
+        _mint(to, id);
     }
 
     function burn(uint id) external {
-        // TODO: add logic for token burning
+        require(this.ownerOf(id) == msg.sender);
+        _burn(id);
     }
 }
