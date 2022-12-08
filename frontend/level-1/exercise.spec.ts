@@ -1,14 +1,21 @@
+import { objectToString } from '@vue/shared'
 import { expect } from 'chai'
+import { type } from 'os'
 
 /**
  * Exercise 1
  * 
- * Given the data, you must define the interface "User" and use it accordingly
+ * Given the data, you must define the type "User" and use it accordingly
  */
 
-type User = unknown;
 
-const users: unknown[] = [
+type User = {
+  name: string,
+  age: number,
+  occupation: string,
+}
+
+const users: User[] = [
   {
     name: 'Max Mustermann',
     age: 25,
@@ -21,8 +28,8 @@ const users: unknown[] = [
   }
 ]
 
-const exerciseOne = (users: unknown[]) => {
-  return users.map((user: unknown) => `${user.name} - ${user.age}`)
+const exerciseOne = (users: User[]) => {
+  return users.map((user: User) => `${user.name} - ${user.age}`)
 }
 
 /**
@@ -38,9 +45,9 @@ type Admin = {
   role: string;
 }
 
-type Person = unknown;
+type Person = Admin | User
 
-const persons: User[] /* Person[] */ = [
+const persons: Person[] = [
   {
     name: 'Max Mustermann',
     age: 25,
@@ -63,8 +70,8 @@ const persons: User[] /* Person[] */ = [
   }
 ]
 
-const exerciseTwo = (persons: unknown[]) => {
-  return persons.map((person: unknown) => `${person.name} - ${person.age}`)
+const exerciseTwo = (persons: Person[]) => {
+  return persons.map((person: Person) => `${person.name} - ${person.age}`)
 }
 
 /**
@@ -72,14 +79,21 @@ const exerciseTwo = (persons: unknown[]) => {
  * 
  * Define the two following functions to define if a person is a user or an admin.
  */
+
+
 const isAdmin = (person: Person): boolean => {
-  // TODO: insert logic here
-  return false
+  if('role' in person){
+    return true
+  }
+  else return false
 }
 
+
 const isUser = (person: Person): boolean => {
-  // TODO: insert logic here
-  return false
+  if('occupation' in person){
+    return true
+  }
+  else return false
 }
 
 /**
@@ -90,17 +104,17 @@ const isUser = (person: Person): boolean => {
  */
 
 class ObjectManipulator {
-  constructor(protected obj) {}
+  constructor(protected obj: {[key: string]: any}) {}
 
-  public set(key, value) {
+  public set(key: string, value: any) {
     return new ObjectManipulator({...this.obj, [key]: value});
   }
 
-  public get(key) {
+  public get(key: string) {
     return this.obj[key];
   }
 
-  public delete(key) {
+  public delete(key: string) {
     const newObj = {...this.obj};
     delete newObj[key];
     return new ObjectManipulator(newObj);
