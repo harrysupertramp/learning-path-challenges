@@ -11,10 +11,37 @@ type Character = {
     charisma: number;
 }
 
-const generateCharacter = (name: unknown): Character => {
-    // TODO: define function
-    return { name, health: 10, strength: 0, dexterity: 0, constitution: 0, intelligence: 0, wisdom: 0, charisma: 0 }; 
-}
+const randomScore = (): number => {
+    let smallest = 0
+    let totalScore = 0
+    for (let i = 0; i < 4; i++) {
+      const score = Math.floor((Math.random() * (6)) + 1)
+      if (i == 0) {
+        smallest = score
+      }
+      if (score < smallest) {
+        smallest = score
+      }
+      totalScore += score
+    }
+    return totalScore - smallest
+  }
+  
+  const generateCharacter = (nameSet: string): Character => {
+    const character: Character = {
+      name: nameSet,
+      health: 0,
+      strength: randomScore(),
+      dexterity: randomScore(),
+      constitution: randomScore(),
+      intelligence: randomScore(),
+      wisdom: randomScore(),
+      charisma: randomScore()
+    }
+    character.health = 10 - Math.floor((character.constitution - 10) / 2)
+  
+    return character
+  }
 
 describe('[Backend] Level 1', () => {
     it('Should create a character with correct stats', () => {
@@ -29,3 +56,4 @@ describe('[Backend] Level 1', () => {
         expect(10 - Math.floor((character.constitution - 10)/2)).eq(character.health);
     })
 })
+
