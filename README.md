@@ -3,6 +3,7 @@
 ![Shadowy Learning Path logo](assets/logo.png)
 
 > The Shadowy Learning Path it's still in **beta** and will change very often.
+> Brought to you by [Shadowy Creators](https://shadowycoders.dev/) and the amazing open source community 
 
 Welcome to the repository that contains the challenges for the **Shadowy Learning Path**! Here you'll find, for each path (_frontend_, _backend_ or _contracts_) and each level the challenge you **must** complete in order to obtain the badge!
 
@@ -20,7 +21,7 @@ Each level folder contains a `README.md` file, a `exercise.spec.ts` code file th
 
 ## 📚 Challenge verification
 
-After you've finished writing your code in your forked repository, you'll create a PR (pull request) on this repository updating the `BADGES.md` file with your username and the link to your forked repo.
+After you've finished writing your code in your forked repository, you'll create a PR (pull request) on this repository updating **ONLY** (do not submit PRs with more files committed, it will be rejected) the `BADGES.md` file with your username and the link to your forked repo.
 
 In order to speed-up the challenge verification process, we created a Telegram group (`@TODO`) where you can ping one of the Shadowers to go and check your newly submitted PR: if you succeeded in beating the challenge, your pull request will be accepted and your name will appear in the `BADGES.md` file.
 
